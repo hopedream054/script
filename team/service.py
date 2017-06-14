@@ -4,7 +4,9 @@ import urllib.request
 import webbrowser
 import json
 import xml.etree.ElementTree as etree
-
+import smtplib
+import mysmtplib
+from email.mime.text import MIMEText
 
 class SERVICE:
 
@@ -37,6 +39,7 @@ class SERVICE:
             root = tree.getiterator("movie")
             for a in root:
                 print(a.findtext('movieNm'))
+                fLetter.write(a.findtext('movieNm')+ '\n')
                 # cc="영화 개봉일자 : "+ a.findtext('openDt')[0:4]+"년 "+a.findtext('openDt')[4:6]+"월 "+a.findtext('openDt')[6:8]"일"
                 cc = a.findtext('openDt')
 
@@ -59,10 +62,10 @@ class SERVICE:
 
 
                 for cc in rootT.iter("movieInfo"):
-                    if (aa.findtext("showTm") != None):
-                        print("상영시간")
-                        print("    " + cc.findtext("showTm") + "분")
-                        fLetter.write("상영시간" + '\n' + "    " + cc.findtext("showTm") + "분" + '\n')
+                    print("상영시간")
+
+                    print("    " + cc.findtext("showTm") + "분")
+                    fLetter.write("상영시간" + '\n' + "    " + cc.findtext("showTm") + "분" + '\n')
 
 
                 for aa in rootT.iter("director"):
@@ -77,9 +80,34 @@ class SERVICE:
                         print("    " + aa.findtext("peopleNm"))
                         fLetter.write("영화배우"+ '\n' + "    " + aa.findtext("peopleNm") + '\n')
                 print('----------------------')
+                fLetter.write('----------------------'+ '\n')
+
+            fLetter.close()
+            # encoding=utf-8
+            you = input("정보를 보낼 이메일을 입력해주세요. : ")
+            textfile = 'letter.txt'
+            me = 'kpuscript@gmail.com'
+            # Open a plain text file for reading.  For this example, assume that
+            # the text file contains only ASCII characters.
+            fp = open(textfile, 'rb')
+            # Create a text/plain message
+            msg = MIMEText(fp.read(), "plain", _charset="utf-8")
+            fp.close()
+
+
+            msg['Subject'] = "%s에 대해 검색한 결과입니다!"%Moviename
+            msg['From'] = me
+            msg['To'] = you
+            s = mysmtplib.MySMTP('smtp.gmail.com', 587)
+            s.ehlo()
+            s.starttls()
+            s.ehlo()
+            s.login(me, "kpu12345")
+            s.sendmail(me, [you], msg.as_string())
+            s.quit()
+
         else:
             print("Error Code:" + rescode)
-        fLetter.close()
 
     def Seach(Moviename):
         client_id = "2KUjl0QjQdmVCG7JbOW2"

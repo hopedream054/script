@@ -9,10 +9,9 @@ class FIRST_INTRO:
         print("영화위키에 오신걸 환영합니다!!")
         print("========Menu==========")
         print("영화검색 : 1")
-        print("영화리뷰 : 2")
-        print("원하는 날짜 영화 순위  : 3")
-        print("금일의 박스오피스 : 4")
-        print("끝내기 :   5")
+        print("원하는 날짜 영화 순위  : 2")
+        print("금일의 박스오피스 : 3")
+        print("끝내기 :   4")
         print("======================")
         answer = input("선택하세요 : ")
         return answer
@@ -24,23 +23,18 @@ class FIRST_INTRO:
             return moviename
 
         elif answer == '2':
-            moviename = input("영화명을 입력하여 리뷰를 찾아보세요 : ") + '리뷰' or 'review'
-            SERVICE.Blog_Review(moviename)
-            return moviename
-
-        elif answer == '3':
             moviename = input("검색하실 날짜를 YYYYMMDD로 입력해주세요. ex)20160520 : ")
 
             SERVICE.bestMovieWantDay(moviename)
             pass
 
-        elif answer == '4':
+        elif answer == '3':
 
             now = datetime.datetime.now() - datetime.timedelta(days=1)
             timeText = now.strftime('%Y%m%d')
             SERVICE.bestMovieDay(timeText)
             return 'sss'
-        elif answer == '5':
+        elif answer == '4':
             pass
 
         elif answer == '6':
