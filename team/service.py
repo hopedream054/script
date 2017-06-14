@@ -6,6 +6,7 @@ import json
 import xml.etree.ElementTree as etree
 
 
+
 class SERVICE:
 
     def __init__(self):
@@ -15,6 +16,8 @@ class SERVICE:
         pass
 
     def Search(Moviename):
+        print(Moviename)
+        print(type(Moviename))
         encText = urllib.parse.quote(Moviename)
         key = '8be8eb002379e48966e30456fc238974'
         url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.xml?" + "key=" + key + "&movieNm=" + encText
@@ -40,7 +43,8 @@ class SERVICE:
                 dayz = "영화의 개봉일자  : " + cc[0:4] + "년 " + cc[4:6] + "월 " + cc[6:8] + "일"
                 # print( + ( + "년 "+ a.findtext('openDt')[4:6] + "월 " ++ a.findtext('openDt')[6:8]+"일"))
                 print(dayz)
-                print("영화의 장르 : ", a.findtext('genreAlt'))
+                print("영화의 장르 : ")
+                print(a.findtext('genreAlt'))
 
                 data = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.xml?" + "key=" + key + "&movieCd=" + a.findtext(
                     'movieCd')
