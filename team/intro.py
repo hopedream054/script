@@ -20,7 +20,7 @@ class FIRST_INTRO:
         if answer == '1':
             moviename = input("영화명을 입력하세요 : ")
             SERVICE.Search(moviename)
-            return moviename
+
 
         elif answer == '2':
             moviename = input("검색하실 날짜를 YYYYMMDD로 입력해주세요. ex)20160520 : ")
@@ -33,8 +33,13 @@ class FIRST_INTRO:
             now = datetime.datetime.now() - datetime.timedelta(days=1)
             timeText = now.strftime('%Y%m%d')
             SERVICE.bestMovieDay(timeText)
+<<<<<<< HEAD
             return 'sss'
         elif answer == '4':
+=======
+
+        elif answer == '5':
+>>>>>>> 429cd42396ee6959fc6cf23c9c7691e31bfd9067
             pass
 
         elif answer == '6':

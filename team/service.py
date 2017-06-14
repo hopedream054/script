@@ -8,6 +8,7 @@ import smtplib
 import mysmtplib
 from email.mime.text import MIMEText
 
+
 class SERVICE:
 
     def __init__(self):
@@ -17,8 +18,13 @@ class SERVICE:
         pass
 
     def Search(Moviename):
+<<<<<<< HEAD
         fLetter = open("letter.txt", "w")
         fLetter.write("영화 제목 : "+Moviename+'\n')
+=======
+        print(Moviename)
+        print(type(Moviename))
+>>>>>>> 429cd42396ee6959fc6cf23c9c7691e31bfd9067
         encText = urllib.parse.quote(Moviename)
         key = '8be8eb002379e48966e30456fc238974'
         url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.xml?" + "key=" + key + "&movieNm=" + encText
@@ -46,9 +52,14 @@ class SERVICE:
                 dayz = "영화의 개봉일자  : " + cc[0:4] + "년 " + cc[4:6] + "월 " + cc[6:8] + "일"
                 # print( + ( + "년 "+ a.findtext('openDt')[4:6] + "월 " ++ a.findtext('openDt')[6:8]+"일"))
                 print(dayz)
+<<<<<<< HEAD
                 fLetter.write(dayz + '\n')
                 print("영화의 장르 : ", a.findtext('genreAlt'))
                 fLetter.write("영화의 장르 : "+ a.findtext('genreAlt') + '\n')
+=======
+                print("영화의 장르 : ")
+                print(a.findtext('genreAlt'))
+>>>>>>> 429cd42396ee6959fc6cf23c9c7691e31bfd9067
 
                 data = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.xml?" + "key=" + key + "&movieCd=" + a.findtext(
                     'movieCd')
